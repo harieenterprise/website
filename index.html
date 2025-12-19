@@ -1,52 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Meet Your Desk Companion</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <title>Emoji Bot Controller</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 2rem; }
+    button { font-size: 2rem; margin: 1rem; padding: 1rem 2rem; border-radius: 12px; }
+  </style>
 </head>
 <body>
+  <h1>🎮 Emoji Bot Remote</h1>
+  <p>Choose what to show:</p>
 
-  <!-- Background animation -->
-  <div class="bg-grid"></div>
+  <button onclick="sendEmoji('cat')">🐱 Cat</button>
+  <button onclick="sendEmoji('smile')">😊 Smile</button>
+  <button onclick="sendEmoji('heart')">❤️ Heart</button>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="content">
-      <h1 class="glow">Your Desk. <br>But Alive.</h1>
-      <p class="tagline">
-        A tiny sci-fi desk companion that reacts, feels, and stays with you.
-      </p>
+  <script>
+    const BOT_IP = "http://192.168.1.42"; // Change this to your ESP IP
 
-      <div class="cta">
-        <span class="pill">🚀 Pre-launching soon</span>
-      </div>
-    </div>
-
-
-
-    <div class="bot">
-      <div class="face">
-        <span class="eye left"></span>
-        <span class="eye right"></span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features -->
-  <section class="features">
-    <div class="card">✨ Cute facial reactions</div>
-    <div class="card">🤍 Responds to touch</div>
-    <div class="card">🪐 Desk-friendly size</div>
-    <div class="card">🎁 Perfect gift companion</div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 · Built with curiosity & circuits</p>
-  </footer>
-
+    function sendEmoji(emoji) {
+      fetch(`${BOT_IP}/show?emoji=${emoji}`)
+        .then(res => console.log("Sent:", emoji))
+        .catch(err => alert("Failed to connect to bot!"));
+    }
+  </script>
 </body>
 </html>
