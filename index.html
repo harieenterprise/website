@@ -1,30 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Emoji Bot Controller</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CuteBot Controller</title>
   <style>
     body { font-family: sans-serif; text-align: center; padding: 2rem; }
     button { font-size: 2rem; margin: 1rem; padding: 1rem 2rem; border-radius: 12px; }
   </style>
 </head>
 <body>
-  <h1>🎮 Emoji Bot Remote</h1>
-  <p>Choose what to show:</p>
-
-  <button onclick="sendEmoji('cat')">🐱 Cat</button>
-  <button onclick="sendEmoji('smile')">😊 Smile</button>
-  <button onclick="sendEmoji('heart')">❤️ Heart</button>
+  <h1>😺 Control Your Bot</h1>
+  <button onclick="setMood('happy')">😊 Happy</button>
+  <button onclick="setMood('angry')">😠 Angry</button>
 
   <script>
-    const BOT_IP = "http://192.168.1.13"; // Change this to your ESP IP
+    const BOT_IP = "http://192.168.1.13"; // <-- change this to your ESP IP
 
-    function sendEmoji(emoji) {
-      fetch(`${BOT_IP}/show?emoji=${emoji}`)
-        .then(res => console.log("Sent:", emoji))
-        .catch(err => alert("Failed to connect to bot!"));
+    function setMood(mood) {
+      fetch(`${BOT_IP}/set?mood=${mood}`)
+        .then(res => res.text())
+        .then(text => console.log(text))
+        .catch(err => alert("Can't reach bot"));
     }
   </script>
 </body>
 </html>
-
